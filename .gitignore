@@ -1,0 +1,32 @@
+# Dependencies
+node_modules/
+
+# Build outputs
+dist/
+coverage/
+docs/api/
+
+# Env files
+.env
+.env.local
+examples/express/.env
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS/editor
+.DS_Store
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Misc
+*.tsbuildinfo
+.eslintcache
+PROMPTS_STEAM_PASSPORT.md
+SECURITY.md

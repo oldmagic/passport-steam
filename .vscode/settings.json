@@ -1,0 +1,47 @@
+{
+  // Make sure agent mode is on (VS Code 1.99+)
+  "chat.agent.enabled": true,
+
+  // 1) Auto-approve all tool invocations (files, @terminal, MCP, etc.)
+  "chat.tools.autoApprove": true,
+
+  // 2) Let the agent run many steps before asking to continue
+  "chat.agent.maxRequests": 250,
+
+  // 3) Optional: auto-approve only certain terminal commands and block risky ones
+  // (Terminal auto-approval is experimental; available in newer VS Code builds)
+  "github.copilot.chat.agent.terminal.allowList": {
+    "git": true,
+    "node": true,
+    "npm": true,
+    "pnpm": true,
+    "yarn": true,
+    "python": true,
+    "python3": true,
+    "poetry": true,
+    "uv": true,
+    "deno": true,
+    "go": true,
+    "cargo": true,
+    "gradle": true,
+    "mvn": true,
+    "bash": true,
+    "sh": true,
+    "zsh": true,
+    "echo": true,
+    "cd": true,
+    "ls": true,
+    "pwd": true
+  },
+  "github.copilot.chat.agent.terminal.denyList": {
+    "rm": true,
+    "rmdir": true,
+    "del": true,
+    "chmod": true,
+    "chown": true,
+    "kill": true,
+    "curl": true,
+    "wget": true,
+    "eval": true
+  }
+}

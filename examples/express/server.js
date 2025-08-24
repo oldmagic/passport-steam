@@ -3,6 +3,7 @@ import session from 'express-session';
 import helmet from 'helmet';
 import passport from 'passport';
 import { SteamStrategy } from '../../dist/index.cjs';
+import rateLimit from 'express-rate-limit';
 
 const app = express();
 const ORIGIN = process.env.APP_ORIGIN || 'http://localhost:3000';
@@ -48,10 +49,17 @@ passport.use(new SteamStrategy({
   done(null, { id: profile.id, name: profile.displayName, photos: profile.photos });
 }));
 
+// Rate limiter: apply only to sensitive/expensive endpoints
+const authRateLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute
+  max: 5, // max 5 requests per windowMs per IP
+  message: 'Too many authentication attempts. Please try again later.',
+});
+
 // Routes
 app.get('/auth/steam', passport.authenticate('steam'));
 
-app.get('/auth/steam/return', (req, res, next) => {
+app.get('/auth/steam/return', authRateLimiter, (req, res, next) => {
   passport.authenticate('steam', (err, user) => {
     if (err) return next(err);
     if (!user) return res.status(401).send('Unauthorized');
